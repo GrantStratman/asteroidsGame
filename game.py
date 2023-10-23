@@ -1,40 +1,28 @@
 import pygame
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
-dt = 0
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+class SpaceRocks:
+    def __init__(self):
+        self._init_pygame()
+        self.screen = pygame.display.set_mode((800, 600))
 
-while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    def main_loop(self):
+        while True:
+            self._handle_input()
+            self._process_game_logic()
+            self._draw()
 
-    # fill the screen with a color to wipe away anything from last
-    
-    screen.fill("black")
-    pygame.draw.circle(screen, "red", player_pos, 40)
-    
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
+    def _init_pygame(self):
+        pygame.init()
+        pygame.display.set_caption("Space Rocks")
 
-    # flip() the display to put your work on screen
-    pygame.display.flip()
+    def _handle_input(self):
+        pass
 
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
+    def _process_game_logic(self):
+        pass
 
-pygame.quit()
+    def _draw(self):
+        self.screen.fill((0, 0, 255))
+        pygame.display.flip()
+
+
