@@ -1,7 +1,7 @@
 from pygame.math import Vector2
 from pygame.transform import rotozoom
 
-from utils import load_sprite , wrap_postion, get_random_velocity
+from utils import load_sprite , wrap_position, get_random_velocity
 
 #create a constant vector 
 UP = Vector2(0, -1)
@@ -18,7 +18,7 @@ class GameObject:
         surface.blit(self.sprite, blit_position)
 
     def move(self, surface):
-        self.position = wrap_postion(self.position + self.velocity, surface)
+        self.position = wrap_position(self.position + self.velocity, surface)
 #check if two objects have collided
     def collides_with(self, other_obj):
         distance = self.position.distance_to(other_obj.position)
