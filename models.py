@@ -32,7 +32,10 @@ class Spaceship(GameObject):
     #variable for how fast you can rotate the ship
     MANEUVERABILITY = 3
     ACCELERATION = 0.25
-    def __init__(self, position):
+    BULLET_SPEED = 3
+    #This is the constructor for the spaceship, it take in the position and the create bullet callback to SpaceRocks
+    def __init__(self, position, create_bullet_callback):
+        self.create_bullet_callback = create_bullet_callback
         # Make a copy of the original UP vector
         self.direction = Vector2(UP)
 
@@ -53,12 +56,29 @@ class Spaceship(GameObject):
 
     def accelerate(self):
         self.velocity + self.direction * self.ACCELERATION
+    
+    #Create a method called shoot that will create a bullet and add it to the list of bullets
+    def shoot(self):
+        #Calculate the velocity of the bullet
+        bullet_velocity = self.direction * self.BULLET_SPEED + self.velocity
+        #Create a bullet object
+        bullet = Bullet(self.position, bullet_velocity)
 
-
+        #Call the create bullet callback to add the bullet to the list of bullets
+        self.create_bullet_callback(bullet)
 
 
 
 class Asteroid(GameObject):
     def __init__(self, position):
         super().__init__(position, load_sprite("asteroid"), get_random_velocity(1,3))
-        
+
+
+class Bullet(GameObject):
+    #Intialize using the game object constructor but add velocity as a parameter becasue the bullets will move
+    def __init__(self,position,velocity):
+        super().__init__(position, pygame.draw.circle(30),velocity )
+
+
+
+

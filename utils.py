@@ -4,7 +4,7 @@ from pygame.image import load
 from pygame.math import Vector2
 
 def load_sprite(name, with_alpha=True):
-    path = f"assets/sprites/{name}.png"
+    path = f"assets/sprites/sprites/{name}.png"
     loaded_sprite = load(path)
 
     if with_alpha:
